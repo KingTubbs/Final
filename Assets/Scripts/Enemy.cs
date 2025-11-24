@@ -4,50 +4,59 @@ public class Enemy : MonoBehaviour
 {
     public float HP = 10f;
     public float Speed = 1f;
-    public float Damage = 1f;
-    public float AttackRange = 0.5f;
-    public float AttackCooldown = 1f;
+    public float Attack = 1f;
+    public float AttackRadius = 0.5f;
 
-    public Transform Target; // Where enemy moves toward
-    private float attackTimer = 0f;
+    private Rigidbody2D rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+            rb = gameObject.AddComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
+    }
 
     void Update()
     {
-        // Move toward target
-        if (Target != null)
+        MonsterCombat nearestMonster = FindNearestMonster();
+        if (nearestMonster != null)
         {
-            Vector3 dir = (Target.position - transform.position).normalized;
-            transform.position += dir * Speed * Time.deltaTime;
-        }
+            Vector2 dir = (nearestMonster.transform.position - transform.position).normalized;
+            rb.MovePosition(rb.position + dir * Speed * Time.deltaTime);
 
-        // Handle attacking nearby monsters
-        attackTimer -= Time.deltaTime;
-        if (attackTimer <= 0f)
-        {
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, AttackRange);
-            foreach (var hit in hits)
+            // Attack if in range
+            if (Vector2.Distance(transform.position, nearestMonster.transform.position) <= AttackRadius)
             {
-                MonsterCombat mc = hit.GetComponent<MonsterCombat>();
-                if (mc != null)
-                {
-                    mc.TakeDamage(Damage);
-                    attackTimer = AttackCooldown; // reset cooldown after hitting one monster
-                    break; // only hit one per cooldown
-                }
+                nearestMonster.HP -= Attack;
+                if (nearestMonster.HP <= 0) Destroy(nearestMonster.gameObject);
             }
         }
+    }
+
+    MonsterCombat FindNearestMonster()
+    {
+        MonsterCombat[] monsters = FindObjectsOfType<MonsterCombat>();
+        MonsterCombat nearest = null;
+        float minDist = Mathf.Infinity;
+
+        foreach (var m in monsters)
+        {
+            float dist = Vector2.Distance(transform.position, m.transform.position);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                nearest = m;
+            }
+        }
+
+        return nearest;
     }
 
     public void TakeDamage(float amount)
     {
         HP -= amount;
-        if (HP <= 0f)
+        if (HP <= 0)
             Destroy(gameObject);
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, AttackRange);
     }
 }

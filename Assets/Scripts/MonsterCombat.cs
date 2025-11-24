@@ -1,23 +1,40 @@
 using UnityEngine;
+
 public class MonsterCombat : MonoBehaviour
 {
     public float HP = 20f;
     public float Attack = 5f;
+    public float Speed = 2f;
+    public Transform Target; // assign closest enemy dynamically
 
-    // Must be public!
-    public void TakeDamage(float amount)
+    private Rigidbody2D rb;
+
+    void Awake()
     {
-        HP -= amount;
-        if (HP <= 0)
-            Destroy(gameObject);
+        rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+            rb = gameObject.AddComponent<Rigidbody2D>();
+
+        rb.gravityScale = 0;
+
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void Update()
+    {
+        if (Target != null)
+        {
+            Vector2 dir = (Target.position - transform.position).normalized;
+            rb.MovePosition(rb.position + dir * Speed * Time.deltaTime);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
     {
         Enemy enemy = collision.gameObject.GetComponent<Enemy>();
         if (enemy != null)
         {
             enemy.TakeDamage(Attack);
+            HP -= 1f; // simple enemy attack
         }
     }
 }

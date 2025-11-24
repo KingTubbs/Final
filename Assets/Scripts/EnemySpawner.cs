@@ -2,19 +2,25 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
-    public int enemiesPerWave = 5;
+    public GameObject enemyPrefab; // Assign in inspector
     public float spawnRadius = 5f;
+    public float spawnInterval = 2f;
 
-    public Transform playerTransform; // usually at (0,0)
+    private float timer = 0f;
 
-    public void SpawnWave()
+    void Update()
     {
-        for (int i = 0; i < enemiesPerWave; i++)
+        timer += Time.deltaTime;
+        if (timer >= spawnInterval)
         {
-            Vector3 spawnPos = playerTransform.position + (Vector3)(Random.insideUnitCircle * spawnRadius);
-            GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-            enemy.GetComponent<Enemy>().Target = playerTransform;
+            SpawnEnemy();
+            timer = 0f;
         }
+    }
+
+    void SpawnEnemy()
+    {
+        Vector2 randomPos = (Vector2)transform.position + Random.insideUnitCircle * spawnRadius;
+        Instantiate(enemyPrefab, randomPos, Quaternion.identity);
     }
 }
