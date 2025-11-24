@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using Interfaces.Abilities;
 using Interfaces.Bodyparts;
+using UnityEngine;
 
 namespace Classes.Bodyparts
 {
     public class WerewolfArmL : IArmL
-{
+    {
     public string Species => "Werewolf";
     public int HP => 12;
     public int Attack => 8;
@@ -17,7 +18,15 @@ namespace Classes.Bodyparts
     };
 
     public List<IPassiveAbility> PassiveAbilities => new();
+
+    public Sprite Sprite { get; private set; }
+
+    public WerewolfArmL(Sprite sprite)
+    {
+        Sprite = sprite;
+    }
 }
 }
+
 
 

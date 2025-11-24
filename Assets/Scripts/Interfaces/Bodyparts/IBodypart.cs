@@ -10,4 +10,6 @@ public interface IBodypart
 
     List<IActiveAbility> ActiveAbilities { get; }
     List<IPassiveAbility> PassiveAbilities { get; }
+
+    UnityEngine.Sprite Sprite { get; }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Interfaces.Abilities;
 using Interfaces.Bodyparts;
+using UnityEngine;
 
 namespace Classes.Bodyparts
 {
@@ -14,5 +15,14 @@ namespace Classes.Bodyparts
     public List<IActiveAbility> ActiveAbilities => new();
 
     public List<IPassiveAbility> PassiveAbilities => new();
+
+    
+    public Sprite Sprite { get; private set; }
+
+    public WerewolfHead(Sprite sprite)
+    {
+        Sprite = sprite;
+    }
+
 }
 }

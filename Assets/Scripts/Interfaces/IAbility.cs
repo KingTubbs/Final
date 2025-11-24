@@ -15,7 +15,7 @@ public interface IActiveAbility : IAbility
     float Cooldown { get; }
 }
 
-public interface IPassiveAbility
+public interface IPassiveAbility : IAbility
 {
     void Apply(Monster user); // called automatically, or conditionally
     float Cooldown { get; }
