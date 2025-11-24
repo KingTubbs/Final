@@ -7,7 +7,7 @@ public class MonsterCreationTestScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Monster m = MonsterFactory.CreateHybrid();
+        Monster m = MonsterFactory.CreateRandomHybrid();
 
         Debug.Log($"HP: {m.TotalHP}");
         Debug.Log($"Attack: {m.TotalAttack}");

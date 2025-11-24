@@ -7,24 +7,29 @@ using UnityEngine;
 
 public static class MonsterFactory
 {
-    public static Monster CreateHybrid()
+    public static Monster CreateRandomHybrid()
     {
-        // Load sprites (can be from Resources folder or assigned in inspector via a ScriptableObject)
-        Sprite humanHeadSprite = Resources.Load<Sprite>("Sprites/Human/Head");
-        Sprite werewolfArmLSprite = Resources.Load<Sprite>("Sprites/Werewolf/ArmL");
-        Sprite humanArmRSprite = Resources.Load<Sprite>("Sprites/Human/ArmR");
-        Sprite werewolfTorsoSprite = Resources.Load<Sprite>("Sprites/Werewolf/Torso");
-        Sprite humanLegRSprite = Resources.Load<Sprite>("Sprites/Human/LegR");
-        Sprite werewolfLegLSprite = Resources.Load<Sprite>("Sprites/Werewolf/LegL");
+        // Load sprites
+        Sprite humanHeadSprite = Resources.Load<Sprite>("Sprites/BodyParts/Human/Head");
+        Sprite werewolfHeadSprite = Resources.Load<Sprite>("Sprites/BodyParts/Werewolf/Head");
+        Sprite humanArmLSprite = Resources.Load<Sprite>("Sprites/BodyParts/Human/LeftArm");
+        Sprite werewolfArmLSprite = Resources.Load<Sprite>("Sprites/BodyParts/Werewolf/LeftArm");
+        Sprite humanArmRSprite = Resources.Load<Sprite>("Sprites/BodyParts/Human/RightArm");
+        Sprite werewolfArmRSprite = Resources.Load<Sprite>("Sprites/BodyParts/Werewolf/RightArm");
+        Sprite humanTorsoSprite = Resources.Load<Sprite>("Sprites/BodyParts/Human/Torso");
+        Sprite werewolfTorsoSprite = Resources.Load<Sprite>("Sprites/BodyParts/Werewolf/Torso");
+        Sprite humanLegLSprite = Resources.Load<Sprite>("Sprites/BodyParts/Human/LeftLeg");
+        Sprite werewolfLegLSprite = Resources.Load<Sprite>("Sprites/BodyParts/Werewolf/LeftLeg");
+        Sprite humanLegRSprite = Resources.Load<Sprite>("Sprites/BodyParts/Human/RightLeg");
+        Sprite werewolfLegRSprite = Resources.Load<Sprite>("Sprites/BodyParts/Werewolf/RightLeg");
 
-        // Create bodyparts with assigned sprites
-        var head = new HumanHead(humanHeadSprite);
-        var leftArm = new WerewolfArmL(werewolfArmLSprite);
-        var rightArm = new HumanArmR(humanArmRSprite);
-        var torso = new WerewolfTorso(werewolfTorsoSprite);
-        var leftLeg = new WerewolfLegL(werewolfLegLSprite);
-        var rightLeg = new HumanLegR(humanLegRSprite);
-        // ... other bodyparts
+        // Randomly pick human or werewolf for each part
+        IHead head = Random.value > 0.5f ? new HumanHead(humanHeadSprite) : new WerewolfHead(werewolfHeadSprite);
+        IArmL leftArm = Random.value > 0.5f ? new HumanArmL(humanArmLSprite) : new WerewolfArmL(werewolfArmLSprite);
+        IArmR rightArm = Random.value > 0.5f ? new HumanArmR(humanArmRSprite) : new WerewolfArmR(werewolfArmRSprite);
+        ITorso torso = Random.value > 0.5f ? new HumanTorso(humanTorsoSprite) : new WerewolfTorso(werewolfTorsoSprite);
+        ILegL leftLeg = Random.value > 0.5f ? new HumanLegL(humanLegLSprite) : new WerewolfLegL(werewolfLegLSprite);
+        ILegR rightLeg = Random.value > 0.5f ? new HumanLegR(humanLegRSprite) : new WerewolfLegR(werewolfLegRSprite);
 
         // Create monster
         Monster monster = new Monster
