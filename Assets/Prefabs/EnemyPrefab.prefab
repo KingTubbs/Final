@@ -107,7 +107,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   HP: 10
   Speed: 1
-  Target: {fileID: 5007472341765581787, guid: 2807f3fc6e6d8f44e9463619a5bba756, type: 3}
+  Attack: 1
+  AttackRadius: 0.5
+  PlayerHP: 100
+  Player: {fileID: 5007472341765581787, guid: 2807f3fc6e6d8f44e9463619a5bba756, type: 3}
 --- !u!60 &6841686649197800269
 PolygonCollider2D:
   m_ObjectHideFlags: 0
