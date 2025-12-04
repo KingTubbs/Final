@@ -1,6 +1,8 @@
-using System.Collections.Generic;
-using Interfaces.Abilities;
-using Classes;
+namespace Interfaces.Bodyparts
+{
+    using System.Collections.Generic;
+    using Interfaces.Abilities;
+    using Classes;
 public interface IBodypart
 {
     string Species { get; }
@@ -12,4 +14,5 @@ public interface IBodypart
     List<IPassiveAbility> PassiveAbilities { get; }
 
     UnityEngine.Sprite Sprite { get; }
+}
 }
