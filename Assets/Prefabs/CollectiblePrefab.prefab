@@ -103,5 +103,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc2f8dc16047fa459e137304231bdd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  item: {fileID: 0}
+  item: {fileID: 11400000, guid: d81555095fe9ca8468e2ab45d13e075a, type: 2}
   pickupRange: 2

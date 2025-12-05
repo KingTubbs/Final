@@ -12,6 +12,7 @@ public class Collectible : MonoBehaviour
     {
         // Cache reference to player (much cheaper than finding every frame)
         player = FindAnyObjectByType<Player>();
+        Debug.Log("Player found? " + (player != null));
     }
 
     private void Update()
@@ -19,6 +20,7 @@ public class Collectible : MonoBehaviour
         if (player == null) return;
 
         float distance = Vector2.Distance(player.transform.position, transform.position);
+        Debug.Log("Distance = " + distance);
 
         if (distance <= pickupRange)
         {
