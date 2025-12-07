@@ -18,7 +18,7 @@
                 {
                     "name": "InventoryToggle",
                     "type": "Button",
-                    "id": "0feebf6d-46ec-4cbb-9785-b9bc90119afa",
+                    "id": "f97bbcb1-ac24-4f67-8980-21c39e31ea46",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -83,7 +83,7 @@
                 },
                 {
                     "name": "",
-                    "id": "ac00e24a-f066-415e-b2c8-bd773eb9036d",
+                    "id": "ef3416f0-4a59-4ac5-8e5f-e7ceb41168ef",
                     "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
@@ -94,7 +94,7 @@
                 },
                 {
                     "name": "",
-                    "id": "f07d678e-1ada-449b-b04c-c21ed74afd5b",
+                    "id": "f1cc95ae-1f1f-4b49-8d78-27737bb1efc9",
                     "path": "",
                     "interactions": "",
                     "processors": "",
@@ -104,6 +104,12 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "76c531d4-2428-48af-b62e-13512d320821",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": []

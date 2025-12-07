@@ -12,10 +12,9 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void OnMove(InputValue value)
+    public void OnMove(InputAction.CallbackContext context)
     {
-        moveInput = value.Get<Vector2>();
-        // Debug.Log("Move input: " + moveInput);
+        moveInput = context.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()

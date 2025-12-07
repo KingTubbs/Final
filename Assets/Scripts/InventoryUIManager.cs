@@ -1,6 +1,7 @@
 using UnityEngine;
 using Classes.Player;
 using TMPro;
+using UnityEngine.UI;
 
 public class InventoryUIManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class InventoryUIManager : MonoBehaviour
     public GameObject slotPrefab;
     public Transform slotParent;
     private Player player;
+
+    public MonsterCreationUIManager monsterCreationUIManager;
 
     void Start()
     {
@@ -25,6 +28,9 @@ public class InventoryUIManager : MonoBehaviour
     {
         bool isActive = !inventoryUI.activeSelf;
         inventoryUI.SetActive(isActive);
+
+        // toggle monster creation at the same time
+        monsterCreationUIManager.ToggleMonsterCreation(isActive);
 
         if (isActive)
             RefreshUI();
