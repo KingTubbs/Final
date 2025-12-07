@@ -30,7 +30,7 @@ public class InventoryUIManager : MonoBehaviour
         inventoryUI.SetActive(isActive);
 
         // toggle monster creation at the same time
-        monsterCreationUIManager.ToggleMonsterCreation(isActive);
+        monsterCreationUIManager.ToggleMonsterCreation();
 
         if (isActive)
             RefreshUI();
