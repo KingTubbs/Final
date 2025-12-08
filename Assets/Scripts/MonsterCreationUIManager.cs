@@ -50,6 +50,12 @@ public class MonsterCreationUIManager : MonoBehaviour
             return;
         }
 
+        Debug.Log($"Item {item.itemName} wants slot {item.partSlot}");
+        foreach (var s in bodyPartSlots)
+        {
+            Debug.Log($"Slot {s.acceptedSlot} is in UI");
+        }
+
         targetSlot.TryAssignItem(item);
 
         CheckAllSlotsFilled();

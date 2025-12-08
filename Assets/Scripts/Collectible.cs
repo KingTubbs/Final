@@ -20,7 +20,7 @@ public class Collectible : MonoBehaviour
         if (player == null) return;
 
         float distance = Vector2.Distance(player.transform.position, transform.position);
-        Debug.Log("Distance = " + distance);
+        //Debug.Log("Distance = " + distance);
 
         if (distance <= pickupRange)
         {

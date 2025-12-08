@@ -3,40 +3,36 @@ using UnityEngine.UI;
 
 public class BodyPartSlot : MonoBehaviour
 {
-    [Header("Slot Type")]
-    public BodyPartType acceptedSlot; // e.g., Head, LeftArm, Torso, etc.
+    public BodyPartType acceptedSlot;  // e.g. Head, Torso, ArmLeft...
+    public Image slotImage;            // assign in Inspector
+    public BodyPartItem storedItem;    // internal
 
-    [Header("UI")]
-    public Image iconImage;          // The visual image in the UI slot
-
-    // The item currently assigned to this slot
-    [HideInInspector] 
-    public BodyPartItem assignedItem;
-
-    // Called by MonsterCreationUIManager when applying an item
-    public bool TryAssignItem(BodyPartItem item)
+    private void Start()
     {
-        // Check type match
-        if (item.partSlot != acceptedSlot)
-        {
-            Debug.Log("Item does not belong in this slot.");
-            return false;
-        }
-
-        assignedItem = item;
-        iconImage.sprite = item.icon;
-        iconImage.enabled = true;
-
-        return true;
+        ClearSlot();
     }
 
-    // For replacing or clearing the slot
+    public void TryAssignItem(BodyPartItem item)
+    {
+        // If the slot already has something, overwrite or return?
+        // For now, we overwrite:
+        storedItem = item;
+
+        slotImage.enabled = true;
+        slotImage.sprite = item.icon;
+
+        Debug.Log($"Assigned {item.itemName} to {acceptedSlot} slot");
+    }
+
+    public bool IsFilled()
+    {
+        return storedItem != null;
+    }
+
     public void ClearSlot()
     {
-        assignedItem = null;
-        iconImage.sprite = null;
-        iconImage.enabled = false;
+        storedItem = null;
+        slotImage.sprite = null;
+        slotImage.enabled = false;
     }
-
-    public bool IsFilled() => assignedItem != null;
 }

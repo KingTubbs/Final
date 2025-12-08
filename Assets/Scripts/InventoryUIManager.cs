@@ -43,10 +43,25 @@ public class InventoryUIManager : MonoBehaviour
 
         foreach (var item in player.inventory.items)
         {
+            Debug.Log("Creating slot for: " + item);
+
             GameObject slot = Instantiate(slotPrefab, slotParent);
 
+            // Visuals
             slot.transform.Find("Icon").GetComponent<Image>().sprite = item.icon;
             slot.transform.Find("Name").GetComponent<TextMeshProUGUI>().text = item.itemName;
+
+            // Logic
+            InventorySlotUI ui = slot.GetComponent<InventorySlotUI>();
+
+            if (ui == null)
+            {
+                Debug.LogError("InventorySlotUI missing on prefab root!");
+            }
+            else
+            {
+                ui.Initialize((BodyPartItem)item, monsterCreationUIManager);
+            }
         }
     }
 }

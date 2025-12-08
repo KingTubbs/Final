@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a5ebd29e051a5a44a68acd9059f96c0, type: 3}
-  m_Name: NewBodyPartItem
+  m_Name: WerewolfLegL
   m_EditorClassIdentifier: Assembly-CSharp::BodyPartItem
-  itemName: Werewolf Right Leg
-  icon: {fileID: -5513050994037168576, guid: 6fdf1145b2247f04d8e51ce49ba89b2c, type: 3}
-  icon: {fileID: -5513050994037168576, guid: 6fdf1145b2247f04d8e51ce49ba89b2c, type: 3}
-  partSlot: 5
+  itemName: Werewolf Left Leg
+  icon: {fileID: 4749100928411242989, guid: 09c7872c81f55be499dee26e743c2919, type: 3}
+  icon: {fileID: 4749100928411242989, guid: 09c7872c81f55be499dee26e743c2919, type: 3}
+  partSlot: 4

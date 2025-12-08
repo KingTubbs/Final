@@ -20,9 +20,17 @@ public class InventorySlotUI : MonoBehaviour
     // Called when player clicks the slot
     public void OnClick()
     {
+        Debug.Log("clicking...");
+        Debug.Log("storedItem = " + storedItem);
+        Debug.Log("creationUI = " + creationUI);
+
         if (storedItem != null)
         {
             creationUI.TryPlaceItem(storedItem);
+        }
+        else
+        {
+            Debug.LogWarning("No stored item in this slot!");
         }
     }
 }
