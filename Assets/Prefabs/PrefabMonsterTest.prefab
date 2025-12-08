@@ -68,7 +68,7 @@ MonoBehaviour:
   HP: 20
   Attack: 5
   Speed: 2
-  Target: {fileID: 5295024330420823742, guid: 553f4e86cfdf85f40993f20ebef7f57e, type: 3}
+  Target: {fileID: 7284331294764094575, guid: 32b9f96d158871445ad7af8bc4f68cf3, type: 3}
 --- !u!60 &-7976453788291457077
 PolygonCollider2D:
   m_ObjectHideFlags: 0

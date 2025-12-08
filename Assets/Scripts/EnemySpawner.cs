@@ -1,17 +1,15 @@
-using Unity.Mathematics;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class ChestSpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public GameObject chestPrefab;
     public Transform player;
-    public float buffer = 2f;        // how far off-screen to spawn
-    public float spawnInterval = 2f;
+    public float buffer = 2f;        
+    public float spawnInterval = 3f;
 
     private float minDistance;
-    private float maxDistance; // you can tune this
-
-    
+    private float maxDistance;
+    private float timer = 0f;
 
     void Start()
     {
@@ -23,19 +21,20 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (Time.time >= spawnInterval)
+        timer += Time.deltaTime;
+        if (timer >= spawnInterval)
         {
-            SpawnEnemy();
-            spawnInterval += spawnInterval;
+            SpawnChest();
+            timer = 0f;
         }
     }
 
-    void SpawnEnemy()
+    void SpawnChest()
     {
-        Vector2 dir = UnityEngine.Random.insideUnitCircle.normalized;
-        float dist = UnityEngine.Random.Range(minDistance, maxDistance);
+        Vector2 dir = Random.insideUnitCircle.normalized;
+        float dist = Random.Range(minDistance, maxDistance);
         Vector2 pos = (Vector2)player.position + dir * dist;
 
-        Instantiate(enemyPrefab, pos, Quaternion.identity);
+        Instantiate(chestPrefab, pos, Quaternion.identity);
     }
 }

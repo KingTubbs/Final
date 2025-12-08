@@ -44,4 +44,32 @@ public static class MonsterFactory
 
         return monster;
     }
+    public static Monster CreateFromUI(MonsterCreationUIManager ui)
+    {
+        // Extract the sprites that the UI slots display
+        Sprite headSprite = ui.GetSprite(BodyPartType.Head);
+        Sprite leftArmSprite = ui.GetSprite(BodyPartType.LeftArm);
+        Sprite rightArmSprite = ui.GetSprite(BodyPartType.RightArm);
+        Sprite torsoSprite = ui.GetSprite(BodyPartType.Torso);
+        Sprite leftLegSprite = ui.GetSprite(BodyPartType.LeftLeg);
+        Sprite rightLegSprite = ui.GetSprite(BodyPartType.RightLeg);
+
+        // Convert UI-chosen sprites into the correct bodypart classes
+        IHead head = new HumanHead(headSprite);       // or determine species dynamically
+        IArmL leftArm = new HumanArmL(leftArmSprite);
+        IArmR rightArm = new HumanArmR(rightArmSprite);
+        ITorso torso = new HumanTorso(torsoSprite);
+        ILegL leftLeg = new HumanLegL(leftLegSprite);
+        ILegR rightLeg = new HumanLegR(rightLegSprite);
+
+        return new Monster
+        {
+            Head = head,
+            LeftArm = leftArm,
+            RightArm = rightArm,
+            Torso = torso,
+            LeftLeg = leftLeg,
+            RightLeg = rightLeg
+        };
+    }
 }

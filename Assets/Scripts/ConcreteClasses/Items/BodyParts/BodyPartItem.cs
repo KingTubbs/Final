@@ -4,27 +4,23 @@ using Classes.Bodyparts;
 using Interfaces.Bodyparts;
 using Classes.Player;
 using System;
+using Interfaces;
 
 [CreateAssetMenu(fileName = "NewBodyPartItem", menuName = "Inventory/BodyPartItem")]
-public class BodyPartItem : Item, ICollectible
+public class BodyPartItem : Item
 {
-    [Header("UI")]
-    public Sprite icon;   // For inventory grid icons
-
     [Header("Monster Creation Slot")]
-    public BodyPartType partSlot;  // <-- NEW: tells the UI which slot this belongs to
+    public BodyPartType partSlot;  // Tells the UI which slot this belongs to
 
     [Header("Bodypart Instantiation")]
-    public Type bodyPartType;  // Your existing approach (concrete class type)
+    public Type bodyPartType;       // concrete class type
+    public IBodypart bodyPart;      // store real stats here
 
     public void OnCollect(Player player)
     {
         player.inventory.AddItem(this);
         Debug.Log($"Collected {itemName}");
     }
-
-    public string GetName() => itemName;
-    public Sprite GetIcon() => icon;
 
     public IBodypart CreateBodyPartInstance()
     {

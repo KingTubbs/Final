@@ -1,22 +1,36 @@
 using UnityEngine;
 using Classes;
+using Classes.Player;
 
 public class MonsterSummonButton : MonoBehaviour
 {
     public GameObject monsterPrefab;
-    public float spawnRadius = 5f; // distance around the player to spawn monsters
 
-    public void SummonRandomHybrid()
+    private Player player;
+
+    void Awake()
     {
-        Monster monsterData = MonsterFactory.CreateRandomHybrid();
+        player = FindAnyObjectByType<Player>();
+    }
 
-        // Random position around (0,0) within a circle of radius spawnRadius
-        Vector2 randomOffset = Random.insideUnitCircle * spawnRadius;
-        Vector3 spawnPos = new Vector3(randomOffset.x, randomOffset.y, 0f);
+    public void SummonCreatedMonster()
+    {
+        if (player == null) return;
+
+        // Get the Monster data from your UI
+        MonsterCreationUIManager ui = MonsterCreationUIManager.Instance;
+
+        // Create the monster
+        Monster monsterData = MonsterFactory.CreateFromUI(ui);
+
+        // Consume/remove the body parts
+        ui.ClearSelectedParts(); 
+
+        // Spawn at player's position
+        Vector3 spawnPos = player.transform.position;
 
         GameObject monsterObj = Instantiate(monsterPrefab, spawnPos, Quaternion.identity);
 
-        MonsterBehaviour behaviour = monsterObj.GetComponent<MonsterBehaviour>();
-        behaviour.Initialize(monsterData);
+        monsterObj.GetComponent<MonsterBehaviour>().Initialize(monsterData);
     }
 }
